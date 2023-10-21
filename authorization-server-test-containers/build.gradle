@@ -1,0 +1,17 @@
+dependencies {
+    api "io.eventuate.common:eventuate-common-testcontainers:$eventuateCommonVersion"
+    implementation "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
+
+    api "org.testcontainers:testcontainers:$testContainersVersion"
+    implementation "org.assertj:assertj-core:$assertjVersion"
+    implementation "io.rest-assured:rest-assured"
+
+}
+
+task writeProperties(type: WriteProperties) {
+    outputFile "${project.buildDir}/generated/eventuate.examples.spring-authorization-server.version.properties"
+    property 'version', version
+}
+
+
+processResources.from(writeProperties)

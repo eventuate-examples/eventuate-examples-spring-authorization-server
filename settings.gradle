@@ -1,0 +1,4 @@
+rootProject.name = "eventuate-examples-spring-authorization-server"
+
+include 'authorization-server'
+include 'authorization-server-test-containers'

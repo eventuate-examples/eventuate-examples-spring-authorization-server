@@ -1,0 +1,11 @@
+.gradle
+build/
+*.idea/
+*.iml
+*.log
+tmp-migration
+
+out
+.DS_Store
+lib
+bin
