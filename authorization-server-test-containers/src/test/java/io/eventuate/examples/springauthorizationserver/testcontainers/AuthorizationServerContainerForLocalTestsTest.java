@@ -11,7 +11,8 @@ public class AuthorizationServerContainerForLocalTestsTest {
 
   @Test
   public void shouldStart() {
-    try (AuthorizationServerContainer authorizationServerContainer = AuthorizationServerContainerForLocalTests.makeFromDockerfile()) {
+    try (AuthorizationServerContainerForLocalTests authorizationServerContainer = AuthorizationServerContainerForLocalTests.makeFromDockerfile()
+            .withReuse(false)) {
       authorizationServerContainer.start();
       String jwt = authorizationServerContainer.getJwt();
       logger.info("JWT: {}", jwt);

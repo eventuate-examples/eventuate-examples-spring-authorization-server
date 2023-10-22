@@ -11,7 +11,7 @@ public class AuthorizationServerContainerForServiceContainersTest {
 
   @Test
   public void shouldStart() {
-    try (AuthorizationServerContainer authorizationServerContainer = AuthorizationServerContainerForServiceContainers.makeFromDockerfile()
+    try (AuthorizationServerContainerForServiceContainers authorizationServerContainer = AuthorizationServerContainerForServiceContainers.makeFromDockerfile()
             .withNetworkAliases("authorization-server")) {
       authorizationServerContainer.start();
       String jwt = authorizationServerContainer.getJwt();

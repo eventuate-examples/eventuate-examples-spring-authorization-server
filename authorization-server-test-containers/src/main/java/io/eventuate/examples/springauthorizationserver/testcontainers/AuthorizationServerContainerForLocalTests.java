@@ -4,7 +4,7 @@ import java.nio.file.Path;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
-public class AuthorizationServerContainerForLocalTests extends AuthorizationServerContainer {
+public class AuthorizationServerContainerForLocalTests extends AuthorizationServerContainer<AuthorizationServerContainerForLocalTests> {
 
   public AuthorizationServerContainerForLocalTests() {
   }
@@ -22,7 +22,7 @@ public class AuthorizationServerContainerForLocalTests extends AuthorizationServ
             () -> String.format("http://localhost:%s", port));
   }
 
-  public static AuthorizationServerContainer makeFromDockerfile() {
+  public static AuthorizationServerContainerForLocalTests makeFromDockerfile() {
     return new AuthorizationServerContainerForLocalTests(DockerfileUtil.findDockerfileInProject("authorization-server/Dockerfile"));
   }
 

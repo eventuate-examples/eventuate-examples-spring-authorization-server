@@ -9,7 +9,7 @@ import org.testcontainers.images.builder.ImageFromDockerfile;
 
 import java.nio.file.Path;
 
-public abstract class AuthorizationServerContainer extends EventuateGenericContainer<AuthorizationServerContainer> implements PropertyProvidingContainer {
+public abstract class AuthorizationServerContainer<T extends AuthorizationServerContainer<T>> extends EventuateGenericContainer<T> implements PropertyProvidingContainer {
 
   public static final int PORT = 9000;
   public static final String TOKEN_ENDPOINT_PATH = "/oauth2/token";

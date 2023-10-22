@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
-public class AuthorizationServerContainerForServiceContainers extends AuthorizationServerContainer {
+public class AuthorizationServerContainerForServiceContainers extends AuthorizationServerContainer<AuthorizationServerContainerForServiceContainers> {
 
   public AuthorizationServerContainerForServiceContainers() {
   }
@@ -14,7 +14,7 @@ public class AuthorizationServerContainerForServiceContainers extends Authorizat
     super(dockerfile);
   }
 
-  public static AuthorizationServerContainer makeFromDockerfile() {
+  public static AuthorizationServerContainerForServiceContainers makeFromDockerfile() {
     return new AuthorizationServerContainerForServiceContainers(DockerfileUtil.findDockerfileInProject("authorization-server/Dockerfile"));
   }
 
@@ -37,12 +37,8 @@ public class AuthorizationServerContainerForServiceContainers extends Authorizat
     return Map.of("API_GATEWAY_TOKEN_ENDPOINT", getBaseUrl() + TOKEN_ENDPOINT_PATH);
   }
 
-  public AuthorizationServerContainer withIssuerUri(String issuerUri) {
-    return this;
-  }
-
   @Override
-  public AuthorizationServerContainer withNetworkAliases(String... aliases) {
+  public AuthorizationServerContainerForServiceContainers withNetworkAliases(String... aliases) {
     super.withNetworkAliases(aliases);
     withEnv("AUTHORIZATIONSERVER_ISSUER_URI", getBaseUrl());
     return this;
