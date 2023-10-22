@@ -9,11 +9,19 @@ orbs:
             description: the script to execute
             type: string
         docker:
-          - image: cimg/base:stable
+          - image: cimg/openjdk:17.0.3
         steps:
           - checkout
           - setup_remote_docker:
               version: 20.10.11
+          - run:
+              name: create checksum file
+              command: cat gradle.properties gradle/wrapper/gradle-wrapper.properties > /tmp/files_to_checksum
+
+          - restore_cache:
+              keys:
+              - eventuate-examples-java-spring-todo-list-{{ checksum "/tmp/files_to_checksum" }}
+              - eventuate-examples-java-spring-todo-list-
           - run:
               name: docker buildx build
               command: |

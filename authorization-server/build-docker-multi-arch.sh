@@ -2,6 +2,8 @@
 
 SCRIPT_DIR=$(cd $( dirname "${BASH_SOURCE[0]}" ) ; pwd)
 
+./gradlew :authorization-server:assemble
+
 if [ -z "$AUTHORIZATION_SERVER_MULTI_ARCH_IMAGE" ] ; then
   docker-compose -f $SCRIPT_DIR/../docker-compose-registry.yml --project-name eventuate-common-registry up -d registry
 fi
