@@ -1,0 +1,70 @@
+version: 2.1
+orbs:
+ orbs:
+  eventuate-gradle-build-and-test: "eventuate_io/eventuate-gradle-build-and-test@0.2.8"
+  build-multi-arch-image:
+    jobs:
+      build:
+        parameters:
+          script:
+            description: the script to execute
+            type: string
+        docker:
+          - image: cimg/base:stable
+        working_directory: ~/eventuate-common
+        steps:
+          - checkout
+          - setup_remote_docker:
+              version: 20.10.11
+          - run:
+              name: docker buildx build
+              command: |
+                . set-multi-arch-image-env-vars.sh
+                docker context create tls-env
+                docker buildx create tls-env --use
+                
+                # failed to solve: process "/dev/.buildkit_qemu_emulator
+                # https://github.com/docker/buildx/issues/493#issuecomment-754834977
+                # https://github.com/tonistiigi/binfmt#installing-emulators
+                
+                docker run --privileged --rm tonistiigi/binfmt:qemu-v6.2.0 --install arm64,arm
+                
+                docker login -u ${DOCKER_USER_ID?} -p ${DOCKER_PASSWORD?}
+                
+                <<parameters.script>>
+jobs:
+  deploy-multi-arch:
+    docker:
+      - image: cimg/base:stable
+    working_directory: ~/eventuate-common
+    steps:
+      - checkout
+      - run:
+          command: |
+            . set-multi-arch-image-env-vars.sh
+            ./publish-multi-arch.sh
+workflows:
+  build-test-and-deploy:
+    jobs:
+      - build-and-test/build-and-test:
+          name: build-and-test
+          script: ./gradlew build
+      - build-multi-arch-image/build:
+          name: build-multi-arch
+          script: ./authorization-server/build-docker-multi-arch.sh
+          context:
+            - publish
+          requires:
+            - build-and-test
+      - build-and-test/build-and-test:
+          name: publish-artifacts
+          context:
+            - publish
+          requires:
+            - build-multi-arch
+          script: ./publish-artifacts.sh
+      - publish-multi-arch:
+          context:
+            - publish
+          requires:
+            - build-multi-arch

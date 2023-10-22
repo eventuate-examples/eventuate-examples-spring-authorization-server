@@ -4,13 +4,16 @@ buildscript {
         maven {
             url "https://plugins.gradle.org/m2/"
         }
+        eventuateMavenRepoUrl.split(',').each { repoUrl -> maven { url repoUrl } }
     }
     dependencies {
         classpath "org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion"
+        classpath "io.eventuate.plugins.gradle:eventuate-plugins-gradle-publish:$eventuatePluginsGradleVersion"
     }
 }
 
 
+apply plugin: "io.eventuate.plugins.gradle.publish.EventuatePublish"
 
 allprojects {
     group = "io.eventuate.examples.spring-authorization-server"

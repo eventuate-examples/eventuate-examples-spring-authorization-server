@@ -21,5 +21,5 @@ This repository also extends Testcontainers to allow Spring Authorization Server
 
 ## Acknowledgements
 
-The password grant code is based on the code sample provided by [akuma8](https://github.com/akuma8) this [Stackoverflow post](https://stackoverflow.com/a/76335287), which references this [Gist](https://gist.github.com/akuma8/2eb244b796f3d3506956207997fb290f)
+The password grant code is based on the code sample provided by https://github.com/akuma8[akuma8] this https://stackoverflow.com/a/76335287[Stackoverflow post], which references this https://gist.github.com/akuma8/2eb244b796f3d3506956207997fb290f[Gist]
 
