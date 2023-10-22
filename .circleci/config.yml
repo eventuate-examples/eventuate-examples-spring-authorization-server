@@ -1,6 +1,5 @@
 version: 2.1
 orbs:
- orbs:
   eventuate-gradle-build-and-test: "eventuate_io/eventuate-gradle-build-and-test@0.2.8"
   build-multi-arch-image:
     jobs:
@@ -11,7 +10,6 @@ orbs:
             type: string
         docker:
           - image: cimg/base:stable
-        working_directory: ~/eventuate-common
         steps:
           - checkout
           - setup_remote_docker:
@@ -33,10 +31,9 @@ orbs:
                 
                 <<parameters.script>>
 jobs:
-  deploy-multi-arch:
+  publish-multi-arch:
     docker:
       - image: cimg/base:stable
-    working_directory: ~/eventuate-common
     steps:
       - checkout
       - run:
@@ -46,7 +43,7 @@ jobs:
 workflows:
   build-test-and-deploy:
     jobs:
-      - build-and-test/build-and-test:
+      - eventuate-gradle-build-and-test/build-and-test:
           name: build-and-test
           script: ./gradlew build
       - build-multi-arch-image/build:
@@ -56,7 +53,7 @@ workflows:
             - publish
           requires:
             - build-and-test
-      - build-and-test/build-and-test:
+      - eventuate-gradle-build-and-test/build-and-test:
           name: publish-artifacts
           context:
             - publish
