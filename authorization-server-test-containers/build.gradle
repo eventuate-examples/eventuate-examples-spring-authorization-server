@@ -3,8 +3,10 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
 
     api "org.testcontainers:testcontainers:$testContainersVersion"
+
     implementation "org.assertj:assertj-core:$assertjVersion"
     implementation "io.rest-assured:rest-assured"
+    testImplementation "org.springframework.boot:spring-boot-starter-web"
 
 }
 
@@ -15,3 +17,13 @@ task writeProperties(type: WriteProperties) {
 
 
 processResources.from(writeProperties)
+
+task runAuthorizationServer(type: JavaExec) {
+    group = "Execution"
+    description = "Run the application"
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = "io.eventuate.examples.springauthorizationserver.application.AuthorizationServerApplicationMain"
+    systemProperty "logback.debug", "true"
+}
+
+runAuthorizationServer.dependsOn(":authorization-server:assemble")
