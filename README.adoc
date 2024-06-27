@@ -3,14 +3,14 @@
 This repository publishes a version of the https://spring.io/projects/spring-authorization-server[Spring Authorization Server] for use by the Eventuate example applications.
 It has the following features:
 
-* Extends Spring Authorization Server to support password grants
+* Extends Spring Authorization Server to support the deprecated but useful https://developer.okta.com/blog/2018/06/29/what-is-the-oauth2-password-grant[password grants]
 * Publishes a container image 
 * Defines a Testcontainers extension for using the Spring Authorization Server in JUnit tests
 
 
 ## Adds support for password grants
 
-This repository adds support for password grants to Spring Authorization Server.
+This repository adds support for https://developer.okta.com/blog/2018/06/29/what-is-the-oauth2-password-grant[password grants] to Spring Authorization Server.
 Password grants support the following use cases:
 
 * API Gateway needs to authenticate an API key and secret and generate a JWT that can be passed to downstream services.
