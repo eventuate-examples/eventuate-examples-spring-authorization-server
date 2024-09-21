@@ -42,7 +42,7 @@ import java.util.UUID;
 public class AuthorizationServerConfiguration {
 
   @Autowired(required = false)
-  PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+  private PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
   @Bean
   public SecurityFilterChain authorizationServerSecurityFilterChain(
