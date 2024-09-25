@@ -1,7 +1,41 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version "$springBootVersion"
+    id 'org.graalvm.buildtools.native' version '0.9.24'
+}
 
-apply plugin: 'org.springframework.boot'
+graalvmNative {
+
+    binaries {
+        main {
+            buildArgs.add('--enable-preview')
+            sharedLibrary = false
+
+        }
+    }
+}
 
 dependencies {
     implementation "org.springframework.boot:spring-boot-starter-oauth2-authorization-server"
     implementation "org.springframework.boot:spring-boot-starter-actuator"
+
+    testImplementation "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
+    testImplementation "org.assertj:assertj-core:$assertjVersion"
+    testImplementation "io.rest-assured:rest-assured"
+
+}
+
+test {
+    useJUnitPlatform()
+    jvmArgs = ["-agentlib:native-image-agent=config-output-dir=build/resources/test-graal-config/META-INF/native-image/"]
+    systemProperty "spring.aot.enabled", "true"
+}
+
+task copyDependenciesToDir(type: Copy) {
+    from configurations.runtimeClasspath
+    into "$buildDir/dependencies"
+}
+
+task prepareForNativeBuild(type: GradleBuild) {
+    tasks = ['copyDependenciesToDir', 'test', 'compileAotJava', 'processAotResources', 'aotClasses']
 }

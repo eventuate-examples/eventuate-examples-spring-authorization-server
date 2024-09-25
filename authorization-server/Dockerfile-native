@@ -1,0 +1,32 @@
+FROM container-registry.oracle.com/graalvm/native-image:17-ol8
+
+# -ol8 matches the runtime image
+
+COPY build ./build
+
+# RUN export MUSL_HOME=$PWD/musl-toolchain && \
+#     curl -O https://musl.libc.org/releases/musl-1.2.4.tar.gz && \
+#     curl -O https://zlib.net/fossils/zlib-1.2.13.tar.gz && \
+#     tar -xzvf musl-1.2.4.tar.gz && \
+#     pushd musl-1.2.4 && \
+#     ./configure --prefix=$MUSL_HOME --static && \
+#     make && make install && \
+#     popd && \
+#     ln -s $MUSL_HOME/bin/musl-gcc $MUSL_HOME/bin/x86_64-linux-musl-gcc && \
+#     export PATH="$MUSL_HOME/bin:$PATH" && \
+#     x86_64-linux-musl-gcc --version && \
+#     tar -xzvf zlib-1.2.13.tar.gz && \
+#     pushd zlib-1.2.13 && \
+#     CC=musl-gcc ./configure --prefix=$MUSL_HOME --static && \
+#     make && make install
+
+# --static --libc=musl
+# https://github.com/oracle/graal/issues/4645
+
+RUN native-image  -cp build/resources/test-graal-config:./build/generated/aotClasses:./build/generated/aotResources:./build/resources/aot:./build/resources/main:./build/classes/java/main:./build/classes/java/aot:$(echo ./build/dependencies/*.jar | tr ' ' ':') -o authorization-server  io.eventuate.examples.springauthorizationserver.AuthorizationServerMain 
+
+FROM container-registry.oracle.com/os/oraclelinux:8-slim
+HEALTHCHECK --start-period=30s --interval=5s CMD curl -f http://localhost:9000/actuator/health || exit 1
+ENTRYPOINT [ "./authorization-server" ]
+COPY --from=0 /app/authorization-server authorization-server 
+RUN chmod +x authorization-server
