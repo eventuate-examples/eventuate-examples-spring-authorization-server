@@ -1,19 +1,19 @@
 plugins {
     id 'java'
     id 'org.springframework.boot' version "$springBootVersion"
-    id 'org.graalvm.buildtools.native' version '0.9.24'
+    // id 'org.graalvm.buildtools.native' version '0.9.24'
 }
 
-graalvmNative {
+// graalvmNative {
 
-    binaries {
-        main {
-            buildArgs.add('--enable-preview')
-            sharedLibrary = false
+//     binaries {
+//         main {
+//             buildArgs.add('--enable-preview')
+//             sharedLibrary = false
 
-        }
-    }
-}
+//         }
+//     }
+// }
 
 dependencies {
     implementation "org.springframework.boot:spring-boot-starter-oauth2-authorization-server"
@@ -27,8 +27,8 @@ dependencies {
 
 test {
     useJUnitPlatform()
-    jvmArgs = ["-agentlib:native-image-agent=config-output-dir=build/resources/test-graal-config/META-INF/native-image/"]
-    systemProperty "spring.aot.enabled", "true"
+    // jvmArgs = ["-agentlib:native-image-agent=config-output-dir=build/resources/test-graal-config/META-INF/native-image/"]
+    // systemProperty "spring.aot.enabled", "true"
 }
 
 task copyDependenciesToDir(type: Copy) {
