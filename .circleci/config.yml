@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  eventuate-gradle-build-and-test: "eventuate_io/eventuate-gradle-build-and-test@0.2.8"
+  eventuate-gradle-build-and-test: "eventuate_io/eventuate-gradle-build-and-test@0.2.9"
   build-multi-arch-image:
     jobs:
       build:
@@ -12,8 +12,7 @@ orbs:
           - image: cimg/openjdk:17.0.3
         steps:
           - checkout
-          - setup_remote_docker:
-              version: 20.10.11
+          - setup_remote_docker
           - run:
               name: create checksum file
               command: cat gradle.properties gradle/wrapper/gradle-wrapper.properties > /tmp/files_to_checksum
