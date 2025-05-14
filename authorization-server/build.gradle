@@ -19,6 +19,16 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-oauth2-authorization-server"
     implementation "org.springframework.boot:spring-boot-starter-actuator"
 
+    // Micrometer and OpenTelemetry dependencies
+    implementation 'io.micrometer:micrometer-tracing-bridge-otel'
+    implementation 'io.micrometer:micrometer-registry-prometheus'
+
+    // Micrometer and OpenTelemetry dependencies for distributed tracing
+    implementation 'io.micrometer:micrometer-tracing-bridge-otel'
+    implementation 'io.opentelemetry:opentelemetry-exporter-otlp'
+    implementation 'io.micrometer:micrometer-registry-otlp'
+    implementation 'io.opentelemetry.instrumentation:opentelemetry-instrumentation-annotations:2.2.0'
+
     testImplementation "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
     testImplementation "org.assertj:assertj-core:$assertjVersion"
     testImplementation "io.rest-assured:rest-assured"
