@@ -13,16 +13,16 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 @SpringBootApplication
 public class AuthorizationServerMain {
 
-  @Bean
-  public UserDetailsService userDetailsService() {
-    UserDetails userDetails = User.withDefaultPasswordEncoder()
-            .username("user")
-            .password("password")
-            .roles("USER")
-            .build();
-
-    return new InMemoryUserDetailsManager(userDetails);
-  }
+//  @Bean
+//  public UserDetailsService userDetailsService() {
+//    UserDetails userDetails = User.withDefaultPasswordEncoder()
+//            .username("user")
+//            .password("password")
+//            .roles("USER")
+//            .build();
+//
+//    return new InMemoryUserDetailsManager(userDetails);
+//  }
 
   @Bean
   public AuthorizationServerSettings authorizationServerSettings(@Value("${authorizationserver.issuer.uri:#{null}}") String issuerUri) {

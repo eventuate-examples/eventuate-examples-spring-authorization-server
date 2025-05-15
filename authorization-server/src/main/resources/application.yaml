@@ -8,7 +8,7 @@ logging:
 spring:
   security:
     user:
-      name: user1
+      name: user
       password: password
     oauth2:
       authorizationserver:
