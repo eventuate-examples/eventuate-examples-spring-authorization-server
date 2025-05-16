@@ -124,20 +124,20 @@ public class AuthorizationServerConfiguration {
 
   // https://github.com/spring-projects/spring-authorization-server/issues/502#issuecomment-971731130
 
-  @Bean
-  public OAuth2TokenCustomizer<JwtEncodingContext> oAuth2TokenCustomizer() {
-    return context -> {
-      if (AuthorizationGrantType.PASSWORD.equals(context.getAuthorizationGrantType()) &&
-              OAuth2TokenType.ACCESS_TOKEN.equals(context.getTokenType())) {
-        Authentication principal = context.getPrincipal();
-        Set<String> authorities = new HashSet<>();
-        for (GrantedAuthority authority : principal.getAuthorities()) {
-          authorities.add(authority.getAuthority());
-        }
-        context.getClaims().claim("authorities", authorities);
-      }
-    };
-  }
+//  @Bean
+//  public OAuth2TokenCustomizer<JwtEncodingContext> oAuth2TokenCustomizer() {
+//    return context -> {
+//      if (AuthorizationGrantType.PASSWORD.equals(context.getAuthorizationGrantType()) &&
+//              OAuth2TokenType.ACCESS_TOKEN.equals(context.getTokenType())) {
+//        Authentication principal = context.getPrincipal();
+//        Set<String> authorities = new HashSet<>();
+//        for (GrantedAuthority authority : principal.getAuthorities()) {
+//          authorities.add(authority.getAuthority());
+//        }
+//        context.getClaims().claim("authorities", authorities);
+//      }
+//    };
+//  }
 
   @Bean
   @Order(2)
