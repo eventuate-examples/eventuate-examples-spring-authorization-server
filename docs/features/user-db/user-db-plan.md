@@ -278,20 +278,20 @@ Steps:
 
 ## Steel Thread 17: Integration Testing - Profile Activation
 
-[ ] **Create integration tests for profile activation**
+[x] **Create integration tests for profile activation**
 
 ```text
 Write comprehensive integration tests to verify the UserDatabase profile works correctly.
 
 Steps:
-[ ] 1. Create UserDatabaseIntegrationTest class:
+[x] 1. Create UserDatabaseIntegrationTest class:
     - Test application starts with UserDatabase profile
     - Test initial users are loaded from configuration
     - Test default Spring Security user is NOT created
     - Test authentication with initial users
-[ ] 2. Create test configuration with multiple initial users
-[ ] 3. Run integration tests
-[ ] 4. Commit changes with message "Add integration tests for UserDatabase profile activation"
+[x] 2. Create test configuration with multiple initial users
+[x] 3. Run integration tests
+[x] 4. Commit changes with message "Add integration tests for UserDatabase profile activation"
 ```
 
 ## Steel Thread 18: Integration Testing - OAuth2 Password Grant
