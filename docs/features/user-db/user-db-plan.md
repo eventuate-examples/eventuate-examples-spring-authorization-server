@@ -57,17 +57,17 @@ Steps:
 
 ## Steel Thread 4: User Domain Model - Add Enabled Status
 
-[ ] **Add enabled status to User**
+[x] **Add enabled status to User**
 
 ```text
 TDD: Write one test for enabled status, implement, then commit.
 
 Steps:
-[ ] 1. Write single test:
+[x] 1. Write single test:
     - Test User enabled status defaults to true
-[ ] 2. Add enabled field with default value true
-[ ] 3. Run test to ensure it passes
-[ ] 4. Commit changes with message "Add enabled status to User domain model"
+[x] 2. Add enabled field with default value true
+[x] 3. Run test to ensure it passes
+[x] 4. Commit changes with message "Add enabled status to User domain model"
 ```
 
 ## Steel Thread 5: Configuration Properties

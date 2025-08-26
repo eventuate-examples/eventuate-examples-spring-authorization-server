@@ -29,4 +29,14 @@ class UserTest {
         
         assertThat(user.getRoles()).isEqualTo(roles);
     }
+    
+    @Test
+    void testUserEnabledStatusDefaultsToTrue() {
+        String username = "testuser";
+        String password = "testpassword";
+        
+        User user = new User(username, password);
+        
+        assertThat(user.isEnabled()).isTrue();
+    }
 }
