@@ -232,27 +232,27 @@ Steps:
 
 ## Steel Thread 15: Spring Security Configuration
 
-[ ] **Create UserDatabaseConfig for profile activation**
+[x] **Create UserDatabaseConfig for profile activation**
 
 ```text
 Implement configuration class that wires everything together when UserDatabase profile is active.
 
 Steps:
-[ ] 1. Write UserDatabaseConfigTest:
+[x] 1. Write UserDatabaseConfigTest:
     - Test beans are created when profile is active
     - Test beans are not created when profile is inactive
     - Test UserDetailsService bean is properly configured
     - Test PasswordEncoder bean is created
-[ ] 2. Create UserDatabaseConfig class:
+[x] 2. Create UserDatabaseConfig class:
     - @Configuration, @Profile("UserDatabase")
     - @EnableConfigurationProperties(UserDatabaseProperties.class)
     - Create UserService bean
     - Create UserDetailsService bean (returning userService)
     - Create PasswordEncoder bean (DelegatingPasswordEncoder)
     - Initialize users from properties on startup
-[ ] 3. Create application-UserDatabase.yaml with full configuration
-[ ] 4. Run tests with profile active and inactive
-[ ] 5. Commit changes with message "Add UserDatabaseConfig for Spring Security integration"
+[x] 3. Create application-UserDatabase.yaml with full configuration
+[x] 4. Run tests with profile active and inactive
+[x] 5. Commit changes with message "Add UserDatabaseConfig for Spring Security integration"
 ```
 
 ## Steel Thread 16: API Security Configuration
