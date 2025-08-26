@@ -296,22 +296,22 @@ Steps:
 
 ## Steel Thread 18: Integration Testing - OAuth2 Password Grant
 
-[ ] **Test OAuth2 password grant with dynamic users**
+[x] **Test OAuth2 password grant with dynamic users**
 
 ```text
 Verify that OAuth2 password grant works with users from the UserDatabase.
 
 Steps:
-[ ] 1. Write OAuth2PasswordGrantTest:
+[x] 1. Write OAuth2PasswordGrantTest:
     - Test password grant with initial user
     - Create new user via API
     - Test password grant with newly created user
     - Test grant fails with deleted user
     - Test role-based authorization in tokens
-[ ] 2. Use REST-assured or Spring's TestRestTemplate for OAuth2 flows
-[ ] 3. Verify JWT tokens contain correct user claims and roles
-[ ] 4. Run OAuth2 integration tests
-[ ] 5. Commit changes with message "Add OAuth2 password grant integration tests"
+[x] 2. Use REST-assured or Spring's TestRestTemplate for OAuth2 flows
+[x] 3. Verify JWT tokens contain correct user claims and roles
+[x] 4. Run OAuth2 integration tests
+[x] 5. Commit changes with message "Add OAuth2 password grant integration tests"
 ```
 
 ## Steel Thread 19: End-to-End Testing (Happy Path)

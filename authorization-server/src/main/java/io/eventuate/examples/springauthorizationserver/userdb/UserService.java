@@ -30,6 +30,10 @@ public class UserService implements UserDetailsService {
         return new ArrayList<>(users.values());
     }
     
+    public void deleteUser(String username) {
+        users.remove(username);
+    }
+    
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = findByUsername(username);
