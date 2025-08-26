@@ -109,17 +109,17 @@ Steps:
 
 ## Steel Thread 7: UserService - Find User
 
-[ ] **Implement finding user by username**
+[x] **Implement finding user by username**
 
 ```text
 TDD: Write one test for finding user, implement, then commit.
 
 Steps:
-[ ] 1. Write single test:
+[x] 1. Write single test:
     - Test findByUsername returns correct user
-[ ] 2. Implement findByUsername method
-[ ] 3. Run test to ensure it passes
-[ ] 4. Commit changes with message "Add findByUsername to UserService"
+[x] 2. Implement findByUsername method
+[x] 3. Run test to ensure it passes
+[x] 4. Commit changes with message "Add findByUsername to UserService"
 ```
 
 ## Steel Thread 8: UserService - List All Users

@@ -27,4 +27,18 @@ class UserServiceTest {
         assertThat(retrievedUser.getUsername()).isEqualTo(username);
         assertThat(retrievedUser.getPassword()).isEqualTo(password);
     }
+    
+    @Test
+    void testFindByUsernameReturnsCorrectUser() {
+        User user1 = new User("user1", "password1");
+        User user2 = new User("user2", "password2");
+        
+        userService.createUser(user1);
+        userService.createUser(user2);
+        
+        User foundUser = userService.findByUsername("user2");
+        assertThat(foundUser).isNotNull();
+        assertThat(foundUser.getUsername()).isEqualTo("user2");
+        assertThat(foundUser.getPassword()).isEqualTo("password2");
+    }
 }
