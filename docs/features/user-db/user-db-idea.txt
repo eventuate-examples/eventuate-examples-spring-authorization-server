@@ -1,0 +1,7 @@
+I want to enhance the authorization server:
+
+Define a UserDatabase Spring profile that has the same configuration as /Users/cer/src/eventuate/eventuate-examples-spring-authorization-server/authorization-server/src/main/resources/application.yaml except that:
+
+* In-memory database (simple hashmap or h2?) for users instead of hardwired single user user/password
+* Prepopulated with user/password
+* REST API for user CRUD
