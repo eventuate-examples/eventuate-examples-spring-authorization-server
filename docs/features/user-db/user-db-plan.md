@@ -42,17 +42,17 @@ Steps:
 
 ## Steel Thread 3: User Domain Model - Add Roles
 
-[ ] **Add roles field to User**
+[x] **Add roles field to User**
 
 ```text
 TDD: Write one test for roles, implement, then commit.
 
 Steps:
-[ ] 1. Write single test:
+[x] 1. Write single test:
     - Test User has roles list
-[ ] 2. Add roles field (List<String>) to User class
-[ ] 3. Run test to ensure it passes
-[ ] 4. Commit changes with message "Add roles to User domain model"
+[x] 2. Add roles field (List<String>) to User class
+[x] 3. Run test to ensure it passes
+[x] 4. Commit changes with message "Add roles to User domain model"
 ```
 
 ## Steel Thread 4: User Domain Model - Add Enabled Status
