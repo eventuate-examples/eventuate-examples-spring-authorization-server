@@ -155,18 +155,18 @@ Steps:
 
 ## Steel Thread 10: REST API Controller - List Users
 
-[ ] **Implement GET /api/users endpoint**
+[x] **Implement GET /api/users endpoint**
 
 ```text
 TDD: Write one test for listing users, implement, then commit.
 
 Steps:
-[ ] 1. Write single test in UserControllerTest:
+[x] 1. Write single test in UserControllerTest:
     - Test GET /api/users returns all users
-[ ] 2. Create UserDTO class (no password field)
-[ ] 3. Create UserController with GET /api/users endpoint
-[ ] 4. Run test to ensure it passes
-[ ] 5. Commit changes with message "Add GET /api/users endpoint"
+[x] 2. Create UserDTO class (no password field)
+[x] 3. Create UserController with GET /api/users endpoint
+[x] 4. Run test to ensure it passes
+[x] 5. Commit changes with message "Add GET /api/users endpoint"
 ```
 
 ## Steel Thread 11: REST API Controller - Get Single User

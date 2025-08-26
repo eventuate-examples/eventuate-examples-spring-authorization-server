@@ -1,0 +1,48 @@
+package io.eventuate.examples.springauthorizationserver.userdb;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.web.servlet.MockMvc;
+
+import java.util.List;
+
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.hamcrest.Matchers.*;
+
+@WebMvcTest(UserController.class)
+@ActiveProfiles("UserDatabase")
+@AutoConfigureMockMvc(addFilters = false)
+class UserControllerTest {
+    
+    @Autowired
+    private MockMvc mockMvc;
+    
+    @MockBean
+    private UserService userService;
+    
+    @Test
+    void testGetUsersReturnsAllUsers() throws Exception {
+        User user1 = new User("user1", "password1", List.of("USER"));
+        User user2 = new User("user2", "password2", List.of("ADMIN"));
+        
+        when(userService.findAll()).thenReturn(List.of(user1, user2));
+        
+        mockMvc.perform(get("/api/users"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(2)))
+                .andExpect(jsonPath("$[0].username", is("user1")))
+                .andExpect(jsonPath("$[0].roles[0]", is("USER")))
+                .andExpect(jsonPath("$[0].enabled", is(true)))
+                .andExpect(jsonPath("$[0].password").doesNotExist())
+                .andExpect(jsonPath("$[1].username", is("user2")))
+                .andExpect(jsonPath("$[1].roles[0]", is("ADMIN")))
+                .andExpect(jsonPath("$[1].enabled", is(true)))
+                .andExpect(jsonPath("$[1].password").doesNotExist());
+    }
+}
