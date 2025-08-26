@@ -201,33 +201,33 @@ Steps:
 
 ## Steel Thread 13: REST API Controller - Create User
 
-[ ] **Add POST endpoint for user creation**
+[x] **Add POST endpoint for user creation**
 
 ```text
 TDD: Write one test for user creation, implement, then commit.
 
 Steps:
-[ ] 1. Write single test:
+[x] 1. Write single test:
     - Test POST /api/users creates user successfully
-[ ] 2. Create CreateUserRequest DTO
-[ ] 3. Implement POST /api/users endpoint
-[ ] 4. Run test to ensure it passes
-[ ] 5. Commit changes with message "Add POST endpoint for user creation"
+[x] 2. Create CreateUserRequest DTO
+[x] 3. Implement POST /api/users endpoint
+[x] 4. Run test to ensure it passes
+[x] 5. Commit changes with message "Add POST endpoint for user creation"
 ```
 
 ## Steel Thread 14: REST API Controller - Handle Duplicate Username
 
-[ ] **Add 409 conflict handling for duplicate usernames**
+[x] **Add 409 conflict handling for duplicate usernames**
 
 ```text
 TDD: Write one test for duplicate username, implement, then commit.
 
 Steps:
-[ ] 1. Write single test:
+[x] 1. Write single test:
     - Test POST /api/users returns 409 for duplicate username
-[ ] 2. Add duplicate checking to POST endpoint
-[ ] 3. Run test to ensure it passes
-[ ] 4. Commit changes with message "Add 409 handling for duplicate usernames"
+[x] 2. Add duplicate checking to POST endpoint
+[x] 3. Run test to ensure it passes
+[x] 4. Commit changes with message "Add 409 handling for duplicate usernames"
 ```
 
 ## Steel Thread 15: Spring Security Configuration

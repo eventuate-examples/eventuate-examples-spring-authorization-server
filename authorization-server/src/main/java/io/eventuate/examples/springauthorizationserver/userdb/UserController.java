@@ -36,9 +36,20 @@ public class UserController {
         return UserDTO.from(user);
     }
     
+    @PostMapping
+    public UserDTO createUser(@RequestBody CreateUserRequest request) {
+        if (userService.findByUsername(request.getUsername()) != null) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Username already exists");
+        }
+        User user = new User(request.getUsername(), request.getPassword(), 
+                            request.getRoles(), request.isEnabled());
+        userService.createUser(user);
+        return UserDTO.from(user);
+    }
+    
     @ExceptionHandler(ResponseStatusException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public Map<String, String> handleNotFound(ResponseStatusException e) {
-        return Map.of("error", e.getReason());
+    public org.springframework.http.ResponseEntity<Map<String, String>> handleResponseStatusException(ResponseStatusException e) {
+        return org.springframework.http.ResponseEntity.status(e.getStatusCode())
+                .body(Map.of("error", e.getReason()));
     }
 }

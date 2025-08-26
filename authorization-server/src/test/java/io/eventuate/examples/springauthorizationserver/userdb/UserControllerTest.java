@@ -10,10 +10,13 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.hamcrest.Matchers.*;
+import org.springframework.http.MediaType;
 
 @WebMvcTest(UserController.class)
 @ActiveProfiles("UserDatabase")
@@ -69,5 +72,48 @@ class UserControllerTest {
         mockMvc.perform(get("/api/users/nonexistent"))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.error", is("User not found")));
+    }
+    
+    @Test
+    void testPostUsersCreatesUserSuccessfully() throws Exception {
+        String requestBody = """
+            {
+                "username": "newuser",
+                "password": "newpassword",
+                "roles": ["USER", "ADMIN"],
+                "enabled": true
+            }
+            """;
+        
+        mockMvc.perform(post("/api/users")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(requestBody))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.username", is("newuser")))
+                .andExpect(jsonPath("$.roles", hasSize(2)))
+                .andExpect(jsonPath("$.roles[0]", is("USER")))
+                .andExpect(jsonPath("$.roles[1]", is("ADMIN")))
+                .andExpect(jsonPath("$.enabled", is(true)))
+                .andExpect(jsonPath("$.password").doesNotExist());
+    }
+    
+    @Test
+    void testPostUsersReturns409ForDuplicateUsername() throws Exception {
+        when(userService.findByUsername("existinguser")).thenReturn(new User("existinguser", "password"));
+        
+        String requestBody = """
+            {
+                "username": "existinguser",
+                "password": "newpassword",
+                "roles": ["USER"],
+                "enabled": true
+            }
+            """;
+        
+        mockMvc.perform(post("/api/users")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(requestBody))
+                .andExpect(status().isConflict())
+                .andExpect(jsonPath("$.error", is("Username already exists")));
     }
 }
