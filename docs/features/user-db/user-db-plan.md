@@ -27,17 +27,17 @@ Steps:
 
 ## Steel Thread 2: User Domain Model - Basic Creation
 
-[ ] **Create User class with basic fields**
+[x] **Create User class with basic fields**
 
 ```text
 TDD: Write one test for User creation, implement, then commit.
 
 Steps:
-[ ] 1. Write single test in UserTest:
+[x] 1. Write single test in UserTest:
     - Test User creation with username and password
-[ ] 2. Create User class with username and password fields
-[ ] 3. Run test to ensure it passes
-[ ] 4. Commit changes with message "Create basic User domain model"
+[x] 2. Create User class with username and password fields
+[x] 3. Run test to ensure it passes
+[x] 4. Commit changes with message "Create basic User domain model"
 ```
 
 ## Steel Thread 3: User Domain Model - Add Roles
