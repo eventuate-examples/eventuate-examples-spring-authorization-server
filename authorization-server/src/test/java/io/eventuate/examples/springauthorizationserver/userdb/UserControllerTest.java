@@ -45,4 +45,29 @@ class UserControllerTest {
                 .andExpect(jsonPath("$[1].enabled", is(true)))
                 .andExpect(jsonPath("$[1].password").doesNotExist());
     }
+    
+    @Test
+    void testGetUserByUsernameReturnsSpecificUser() throws Exception {
+        User user = new User("testuser", "password", List.of("USER", "ADMIN"));
+        
+        when(userService.findByUsername("testuser")).thenReturn(user);
+        
+        mockMvc.perform(get("/api/users/testuser"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.username", is("testuser")))
+                .andExpect(jsonPath("$.roles", hasSize(2)))
+                .andExpect(jsonPath("$.roles[0]", is("USER")))
+                .andExpect(jsonPath("$.roles[1]", is("ADMIN")))
+                .andExpect(jsonPath("$.enabled", is(true)))
+                .andExpect(jsonPath("$.password").doesNotExist());
+    }
+    
+    @Test
+    void testGetUserReturns404ForNonExistentUser() throws Exception {
+        when(userService.findByUsername("nonexistent")).thenReturn(null);
+        
+        mockMvc.perform(get("/api/users/nonexistent"))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.error", is("User not found")));
+    }
 }

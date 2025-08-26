@@ -171,32 +171,32 @@ Steps:
 
 ## Steel Thread 11: REST API Controller - Get Single User
 
-[ ] **Implement GET /api/users/{username} endpoint**
+[x] **Implement GET /api/users/{username} endpoint**
 
 ```text
 TDD: Write one test for getting single user, implement, then commit.
 
 Steps:
-[ ] 1. Write single test:
+[x] 1. Write single test:
     - Test GET /api/users/{username} returns specific user
-[ ] 2. Implement GET /api/users/{username} endpoint
-[ ] 3. Run test to ensure it passes
-[ ] 4. Commit changes with message "Add GET /api/users/{username} endpoint"
+[x] 2. Implement GET /api/users/{username} endpoint
+[x] 3. Run test to ensure it passes
+[x] 4. Commit changes with message "Add GET /api/users/{username} endpoint"
 ```
 
 ## Steel Thread 12: REST API Controller - Handle User Not Found
 
-[ ] **Add 404 handling for non-existent users**
+[x] **Add 404 handling for non-existent users**
 
 ```text
 TDD: Write one test for 404 response, implement, then commit.
 
 Steps:
-[ ] 1. Write single test:
+[x] 1. Write single test:
     - Test GET /api/users/{username} returns 404 for non-existent user
-[ ] 2. Add error handling to GET endpoint
-[ ] 3. Run test to ensure it passes
-[ ] 4. Commit changes with message "Add 404 handling for GET user endpoint"
+[x] 2. Add error handling to GET endpoint
+[x] 3. Run test to ensure it passes
+[x] 4. Commit changes with message "Add 404 handling for GET user endpoint"
 ```
 
 ## Steel Thread 13: REST API Controller - Create User
