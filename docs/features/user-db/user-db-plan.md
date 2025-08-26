@@ -93,18 +93,18 @@ Steps:
 
 ## Steel Thread 6: UserService - Create User
 
-[ ] **Implement user creation in UserService**
+[x] **Implement user creation in UserService**
 
 ```text
 TDD: Write one test for creating a user, implement, then commit.
 
 Steps:
-[ ] 1. Write single test in UserServiceTest:
+[x] 1. Write single test in UserServiceTest:
     - Test creating a user stores it in memory
-[ ] 2. Create UserService with ConcurrentHashMap storage
-[ ] 3. Implement createUser method
-[ ] 4. Run test to ensure it passes
-[ ] 5. Commit changes with message "Implement user creation in UserService"
+[x] 2. Create UserService with ConcurrentHashMap storage
+[x] 3. Implement createUser method
+[x] 4. Run test to ensure it passes
+[x] 5. Commit changes with message "Implement user creation in UserService"
 ```
 
 ## Steel Thread 7: UserService - Find User
