@@ -37,6 +37,11 @@ public abstract class AuthorizationServerContainer<T extends AuthorizationServer
     withExposedPorts(PORT);
   }
 
+  public T withUserDb() {
+    withEnv("SPRING_PROFILES_ACTIVE", "UserDatabase");
+    return self();
+  }
+
 
   public String getJwt() {
     String baseUrl = String.format("http://localhost:%s", getFirstMappedPort());
@@ -64,6 +69,40 @@ public abstract class AuthorizationServerContainer<T extends AuthorizationServer
     System.out.printf("Got JWT %s\n", jwt);
     return jwt;
 
+  }
+
+  public String getClientCredentialsJwt() {
+    String baseUrl = String.format("http://localhost:%s", getFirstMappedPort());
+
+    // Set the client ID and secret for UserDatabase profile
+    String clientId = "realguardio-client";
+    String clientSecret = "secret-rg";
+
+    // Send the POST request for client credentials
+    String jwt = RestAssured.given()
+            .auth().preemptive().basic(clientId, clientSecret)
+            .formParam("grant_type", "client_credentials")
+            .formParam("scope", "message.read message.write")
+            .when()
+            .post(baseUrl + TOKEN_ENDPOINT_PATH)
+            .then()
+            .statusCode(200)
+            .extract().path("access_token");
+    System.out.printf("Got client credentials JWT %s\n", jwt);
+    return jwt;
+  }
+
+  public java.util.List<String> listUsers() {
+    String baseUrl = String.format("http://localhost:%s", getFirstMappedPort());
+    String jwt = getClientCredentialsJwt();
+    
+    return RestAssured.given()
+            .auth().oauth2(jwt)
+            .when()
+            .get(baseUrl + "/api/users")
+            .then()
+            .statusCode(200)
+            .extract().path("username");
   }
 
 }
