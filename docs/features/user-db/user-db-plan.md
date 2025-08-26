@@ -124,33 +124,33 @@ Steps:
 
 ## Steel Thread 8: UserService - List All Users
 
-[ ] **Implement listing all users**
+[x] **Implement listing all users**
 
 ```text
 TDD: Write one test for listing users, implement, then commit.
 
 Steps:
-[ ] 1. Write single test:
+[x] 1. Write single test:
     - Test findAll returns all users
-[ ] 2. Implement findAll method
-[ ] 3. Run test to ensure it passes
-[ ] 4. Commit changes with message "Add findAll to UserService"
+[x] 2. Implement findAll method
+[x] 3. Run test to ensure it passes
+[x] 4. Commit changes with message "Add findAll to UserService"
 ```
 
 ## Steel Thread 9: UserService - UserDetailsService
 
-[ ] **Implement UserDetailsService interface**
+[x] **Implement UserDetailsService interface**
 
 ```text
 TDD: Write one test for loadUserByUsername, implement, then commit.
 
 Steps:
-[ ] 1. Write single test:
+[x] 1. Write single test:
     - Test loadUserByUsername returns Spring Security UserDetails
-[ ] 2. Implement UserDetailsService interface
-[ ] 3. Convert User to UserDetails in loadUserByUsername
-[ ] 4. Run test to ensure it passes
-[ ] 5. Commit changes with message "Implement UserDetailsService in UserService"
+[x] 2. Implement UserDetailsService interface
+[x] 3. Convert User to UserDetails in loadUserByUsername
+[x] 4. Run test to ensure it passes
+[x] 5. Commit changes with message "Implement UserDetailsService in UserService"
 ```
 
 ## Steel Thread 10: REST API Controller - List Users
