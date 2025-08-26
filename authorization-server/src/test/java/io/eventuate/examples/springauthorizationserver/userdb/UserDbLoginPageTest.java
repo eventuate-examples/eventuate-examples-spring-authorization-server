@@ -10,16 +10,15 @@ import org.springframework.test.context.TestPropertySource;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("UserDatabase")
-@TestPropertySource(properties = {
-    "users.initial[0].username=user",
-    "users.initial[0].password={noop}password",
-    "users.initial[0].roles[0]=USER",
-    "users.initial[0].enabled=true"
-})
 class UserDbLoginPageTest extends AbstractLoginPageTest {
 
     @Configuration
     @Import(AuthorizationServerMain.class)
     public static class Config {
+    }
+
+    @Override
+    protected String getUsername() {
+        return "user1";
     }
 }

@@ -77,7 +77,7 @@ class UserDatabaseIntegrationTest {
         UserDetails userDetails = userDetailsService.loadUserByUsername("testuser1");
         assertThat(userDetails).isNotNull();
         assertThat(userDetails.getUsername()).isEqualTo("testuser1");
-        assertThat(userDetails.getPassword()).isEqualTo("testpass1");
+        assertThat(userDetails.getPassword()).isEqualTo("{noop}testpass1");
         assertThat(userDetails.isEnabled()).isTrue();
         assertThat(userDetails.getAuthorities())
                 .extracting(auth -> auth.getAuthority())

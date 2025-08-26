@@ -30,9 +30,13 @@ public class UserDatabaseConfig {
     public void initializeUsers() {
         if (properties.getInitial() != null) {
             for (UserDatabaseProperties.InitialUser initialUser : properties.getInitial()) {
+                String password = initialUser.getPassword();
+                if (!password.startsWith("{")) {
+                    password = "{noop}" + password;
+                }
                 User user = new User(
                     initialUser.getUsername(),
-                    initialUser.getPassword(),
+                    password,
                     initialUser.getRoles(),
                     initialUser.isEnabled()
                 );

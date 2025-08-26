@@ -60,7 +60,7 @@ class UserDatabaseConfigTest {
         
         assertThat(user).isNotNull();
         assertThat(user.getUsername()).isEqualTo("testuser");
-        assertThat(user.getPassword()).isEqualTo("testpass");
+        assertThat(user.getPassword()).isEqualTo("{noop}testpass");
         assertThat(user.getRoles()).containsExactly("USER");
         assertThat(user.isEnabled()).isTrue();
     }
