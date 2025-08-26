@@ -1,0 +1,9 @@
+repos:
+  - repo: local
+    hooks:
+      - id: precommit-check
+        name: Run precommit checks
+        entry: ./gradlew build
+        language: script
+        pass_filenames: false
+        always_run: true
