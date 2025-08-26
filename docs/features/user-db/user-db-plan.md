@@ -11,18 +11,18 @@ This plan implements the UserDatabase feature for the Spring Authorization Serve
 
 ## Steel Thread 1: Project Setup and CI/CD Pipeline
 
-[ ] **Setup project structure and automated deployment pipeline**
+[x] **Setup project structure and automated deployment pipeline**
 
 ```text
 Create the UserDatabase package structure and setup CI/CD pipeline for the authorization server.
 
 Steps:
-[ ] 1. Create package structure `io.eventuate.examples.springauthorizationserver.userdb` in authorization-server/src/main/java
-[ ] 2. Create corresponding test package structure in authorization-server/src/test/java
-[ ] 3. Review existing GitHub Actions workflow (if present) or create new workflow file
-[ ] 4. Ensure the workflow builds and tests the authorization server module
-[ ] 5. Run tests to verify the build pipeline works
-[ ] 6. Commit changes with message "Setup UserDatabase package structure and CI/CD pipeline"
+[x] 1. Create package structure `io.eventuate.examples.springauthorizationserver.userdb` in authorization-server/src/main/java
+[x] 2. Create corresponding test package structure in authorization-server/src/test/java
+[x] 3. Review existing GitHub Actions workflow (if present) or create new workflow file
+[x] 4. Ensure the workflow builds and tests the authorization server module
+[x] 5. Run tests to verify the build pipeline works
+[x] 6. Commit changes with message "Setup UserDatabase package structure and CI/CD pipeline"
 ```
 
 ## Steel Thread 2: User Domain Model - Basic Creation

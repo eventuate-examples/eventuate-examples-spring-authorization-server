@@ -1,0 +1,7 @@
+- JPA entities - that have DB generated IDs - should not have a constructor that has an ID parameter
+- Use assert4j for testing
+- Don't include comments that point out the obvious: e.g. // ID should be null until persisted
+- JPA Don't need setters unless they are required by the domain logic
+- Don't write tests for constructors, e.g. testTravelerWithNoArgsConstructor
+- Don't add finders to repositories unless they are needed by the business logic
+- IMPORTANT do not disable pre-commit hooks
