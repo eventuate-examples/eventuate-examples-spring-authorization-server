@@ -146,8 +146,13 @@ public class AuthorizationServerConfiguration {
     http
         .authorizeHttpRequests((authorize) -> authorize
             .requestMatchers("/actuator/health").permitAll() // Allow access to /actuator/health without authentication
+            .requestMatchers("/api/**").authenticated() // API endpoints require authentication
             .anyRequest().authenticated()
         )
+        // OAuth2 resource server for API endpoints (accepts bearer tokens)
+        .oauth2ResourceServer((oauth2) -> oauth2.jwt(Customizer.withDefaults()))
+        // Basic authentication for API endpoints
+        .httpBasic(Customizer.withDefaults())
         // Form login handles the redirect to the login page from the
         // authorization server filter chain
         .formLogin(Customizer.withDefaults());
