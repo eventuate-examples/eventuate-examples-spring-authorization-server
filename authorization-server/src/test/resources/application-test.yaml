@@ -1,0 +1,19 @@
+users:
+  initial:
+    - username: testuser1
+      password: testpass1
+      roles:
+        - USER
+        - ADMIN
+      enabled: true
+    - username: testuser2
+      password: testpass2
+      roles:
+        - USER
+      enabled: false
+    - username: testuser3
+      password: testpass3
+      roles:
+        - ADMIN
+        - REALGUARDIO_ADMIN
+      enabled: true

@@ -72,23 +72,23 @@ Steps:
 
 ## Steel Thread 5: Configuration Properties
 
-[ ] **Create configuration properties for initial users**
+[x] **Create configuration properties for initial users**
 
 ```text
 Implement UserDatabaseProperties to load initial users from configuration.
 
 Steps:
-[ ] 1. Write UserDatabasePropertiesTest with tests for:
+[x] 1. Write UserDatabasePropertiesTest with tests for:
     - Loading properties from test configuration
     - Handling empty initial users list
     - Loading multiple initial users
-[ ] 2. Create UserDatabaseProperties class with:
+[x] 2. Create UserDatabaseProperties class with:
     - @ConfigurationProperties(prefix = "users")
     - Inner class InitialUser with username, password, roles, enabled
     - List<InitialUser> initial field
-[ ] 3. Create test resources file application-test.yaml with sample configuration
-[ ] 4. Run tests to ensure properties load correctly
-[ ] 5. Commit changes with message "Add UserDatabaseProperties for initial user configuration"
+[x] 3. Create test resources file application-test.yaml with sample configuration
+[x] 4. Run tests to ensure properties load correctly
+[x] 5. Commit changes with message "Add UserDatabaseProperties for initial user configuration"
 ```
 
 ## Steel Thread 6: UserService - Create User
