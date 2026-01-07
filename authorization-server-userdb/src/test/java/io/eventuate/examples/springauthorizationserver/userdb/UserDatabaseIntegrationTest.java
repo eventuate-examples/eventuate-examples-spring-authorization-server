@@ -1,23 +1,19 @@
 package io.eventuate.examples.springauthorizationserver.userdb;
 
-import io.eventuate.examples.springauthorizationserver.AuthorizationServerMain;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static io.restassured.RestAssured.given;
 
-@SpringBootTest(
-    classes = AuthorizationServerMain.class,
-    webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
-)
+@SpringBootTest(classes = UserDatabaseIntegrationTest.TestConfig.class)
 @ActiveProfiles("UserDatabase")
 @TestPropertySource(properties = {
     "users.initial[0].username=testuser1",
@@ -31,16 +27,18 @@ import static io.restassured.RestAssured.given;
     "users.initial[1].enabled=false"
 })
 class UserDatabaseIntegrationTest {
-    
-    @LocalServerPort
-    private int port;
-    
+
+    @Configuration
+    @ComponentScan(basePackageClasses = UserDatabaseConfig.class)
+    static class TestConfig {
+    }
+
     @Autowired
     private ApplicationContext context;
-    
+
     @Autowired
     private UserDetailsService userDetailsService;
-    
+
     @Test
     void testApplicationStartsWithUserDatabaseProfile() {
         assertThat(context).isNotNull();
@@ -48,22 +46,22 @@ class UserDatabaseIntegrationTest {
         assertThat(context.containsBean("userDetailsService")).isTrue();
         assertThat(context.containsBean("passwordEncoder")).isTrue();
     }
-    
+
     @Test
     void testInitialUsersAreLoadedFromConfiguration() {
         UserService userService = context.getBean("userService", UserService.class);
-        
+
         User user1 = userService.findByUsername("testuser1");
         assertThat(user1).isNotNull();
         assertThat(user1.getRoles()).containsExactly("USER", "ADMIN");
         assertThat(user1.isEnabled()).isTrue();
-        
+
         User user2 = userService.findByUsername("testuser2");
         assertThat(user2).isNotNull();
         assertThat(user2.getRoles()).containsExactly("USER");
         assertThat(user2.isEnabled()).isFalse();
     }
-    
+
     @Test
     void testDefaultSpringSecurityUserIsNotCreated() {
         // The default Spring Security user should not exist
@@ -71,7 +69,7 @@ class UserDatabaseIntegrationTest {
         User defaultUser = userService.findByUsername("user");
         assertThat(defaultUser).isNull();
     }
-    
+
     @Test
     void testAuthenticationWithInitialUsers() {
         UserDetails userDetails = userDetailsService.loadUserByUsername("testuser1");
