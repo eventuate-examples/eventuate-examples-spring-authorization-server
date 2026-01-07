@@ -1,6 +1,8 @@
-package io.eventuate.examples.springauthorizationserver.passwordgrant;
+package io.eventuate.examples.springauthorizationserver;
 
 import com.nimbusds.jose.jwk.source.JWKSource;
+import io.eventuate.examples.springauthorizationserver.passwordgrant.OAuth2PasswordGrantAuthenticationConverter;
+import io.eventuate.examples.springauthorizationserver.passwordgrant.OAuth2PasswordGrantAuthenticationProvider;
 import com.nimbusds.jose.proc.SecurityContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -9,8 +11,6 @@ import org.springframework.core.annotation.Order;
 import org.springframework.http.MediaType;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
