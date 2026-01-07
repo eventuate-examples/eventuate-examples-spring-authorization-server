@@ -11,3 +11,5 @@ lib
 bin
 .vscode
 2025-*
+.claude/issues
+.claude/sessions

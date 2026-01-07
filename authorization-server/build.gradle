@@ -17,6 +17,7 @@ plugins {
 
 dependencies {
     implementation project(':authorization-server-password-grant')
+    implementation project(':authorization-server-userdb')
     implementation "org.springframework.boot:spring-boot-starter-oauth2-authorization-server"
     implementation "org.springframework.boot:spring-boot-starter-actuator"
 
