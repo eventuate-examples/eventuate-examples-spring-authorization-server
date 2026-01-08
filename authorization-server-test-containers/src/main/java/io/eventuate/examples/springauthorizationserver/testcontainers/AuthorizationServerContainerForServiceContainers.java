@@ -1,5 +1,8 @@
 package io.eventuate.examples.springauthorizationserver.testcontainers;
 
+import org.testcontainers.images.builder.ImageFromDockerfile;
+import org.testcontainers.utility.DockerImageName;
+
 import java.nio.file.Path;
 import java.util.Map;
 import java.util.function.BiConsumer;
@@ -8,6 +11,18 @@ import java.util.function.Supplier;
 public class AuthorizationServerContainerForServiceContainers extends AuthorizationServerContainer<AuthorizationServerContainerForServiceContainers> {
 
   public AuthorizationServerContainerForServiceContainers() {
+  }
+
+  public AuthorizationServerContainerForServiceContainers(DockerImageName dockerImageName) {
+    super(dockerImageName);
+  }
+
+  public AuthorizationServerContainerForServiceContainers(String dockerImageName) {
+    super(dockerImageName);
+  }
+
+  public AuthorizationServerContainerForServiceContainers(ImageFromDockerfile dockerFile) {
+    super(dockerFile);
   }
 
   public AuthorizationServerContainerForServiceContainers(Path dockerfile) {

@@ -6,6 +6,7 @@ import io.eventuate.common.testcontainers.PropertyProvidingContainer;
 import io.restassured.RestAssured;
 import org.testcontainers.containers.wait.strategy.Wait;
 import org.testcontainers.images.builder.ImageFromDockerfile;
+import org.testcontainers.utility.DockerImageName;
 
 import java.nio.file.Path;
 
@@ -24,6 +25,21 @@ public abstract class AuthorizationServerContainer<T extends AuthorizationServer
 
   public AuthorizationServerContainer() {
     super(ContainerUtil.findImage("eventuateio/eventuate-examples-spring-authorization-server", "eventuate.examples.spring-authorization-server.version.properties"));
+    withConfiguration();
+  }
+
+  public AuthorizationServerContainer(DockerImageName dockerImageName) {
+    super(dockerImageName);
+    withConfiguration();
+  }
+
+  public AuthorizationServerContainer(String dockerImageName) {
+    super(dockerImageName);
+    withConfiguration();
+  }
+
+  public AuthorizationServerContainer(ImageFromDockerfile dockerFile) {
+    super(dockerFile);
     withConfiguration();
   }
 
