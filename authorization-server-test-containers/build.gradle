@@ -27,3 +27,7 @@ task runAuthorizationServer(type: JavaExec) {
 }
 
 runAuthorizationServer.dependsOn(":authorization-server:assemble")
+
+test {
+    systemProperty "eventuate.servicecontainer.serviceimage.version", project.version
+}

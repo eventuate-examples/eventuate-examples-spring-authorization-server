@@ -9,11 +9,14 @@ import org.testcontainers.images.builder.ImageFromDockerfile;
 import org.testcontainers.utility.DockerImageName;
 
 import java.nio.file.Path;
+import java.util.HashMap;
+import java.util.Map;
 
 public abstract class AuthorizationServerContainer<T extends AuthorizationServerContainer<T>> extends EventuateGenericContainer<T> implements PropertyProvidingContainer {
 
   public static final int PORT = 9000;
   public static final String TOKEN_ENDPOINT_PATH = "/oauth2/token";
+  public static final String SERVICE_IMAGE_VERSION_PROPERTY = "eventuate.servicecontainer.serviceimage.version";
 
 
 
@@ -44,8 +47,16 @@ public abstract class AuthorizationServerContainer<T extends AuthorizationServer
   }
 
   public AuthorizationServerContainer(Path dockerfile) {
-    super(new ImageFromDockerfile().withDockerfile(dockerfile));
+    super(new ImageFromDockerfile().withDockerfile(dockerfile).withBuildArgs(serviceImageVersionBuildArgs()));
     withConfiguration();
+  }
+
+  private static Map<String, String> serviceImageVersionBuildArgs() {
+    Map<String, String> buildArgs = new HashMap<>();
+    String serviceImageVersion = System.getProperty(SERVICE_IMAGE_VERSION_PROPERTY);
+    if (serviceImageVersion != null)
+      buildArgs.put("serviceImageVersion", serviceImageVersion);
+    return buildArgs;
   }
 
   private void withConfiguration() {
