@@ -11,6 +11,11 @@ import io.restassured.RestAssured;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.net.URI;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,6 +38,26 @@ class AuthorizationServerMainTest {
 
     @LocalServerPort
     private int port;
+
+    private final String codeVerifier = newCodeVerifier();
+
+    private static String newCodeVerifier() {
+        byte[] bytes = new byte[32];
+        new SecureRandom().nextBytes(bytes);
+        return base64Url(bytes);
+    }
+
+    private static String codeChallengeFor(String codeVerifier) {
+        try {
+            return base64Url(MessageDigest.getInstance("SHA-256").digest(codeVerifier.getBytes(StandardCharsets.US_ASCII)));
+        } catch (NoSuchAlgorithmException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
+    private static String base64Url(byte[] bytes) {
+        return Base64.getUrlEncoder().withoutPadding().encodeToString(bytes);
+    }
 
     public String getJwt() {
         String baseUrl = String.format("http://localhost:%s", port);
@@ -128,6 +153,8 @@ class AuthorizationServerMainTest {
             .queryParam("redirect_uri", redirectUri)
             .queryParam("response_type", responseType)
             .queryParam("scope", scope)
+            .queryParam("code_challenge", codeChallengeFor(codeVerifier))
+            .queryParam("code_challenge_method", "S256")
             .redirects().follow(false)
             .when()
             .get(authorizationEndpointUrl)
@@ -228,6 +255,7 @@ class AuthorizationServerMainTest {
             .formParam("grant_type", "authorization_code")
             .formParam("code", code)
             .formParam("redirect_uri", redirectUri)
+            .formParam("code_verifier", codeVerifier)
             .when()
             .post(baseUrl + TOKEN_ENDPOINT_PATH)
             .then()

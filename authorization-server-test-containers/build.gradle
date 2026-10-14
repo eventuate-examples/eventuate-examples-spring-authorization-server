@@ -1,12 +1,12 @@
 dependencies {
     api "io.eventuate.common:eventuate-common-testcontainers:$eventuateCommonVersion"
-    implementation "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
+    implementation "org.springframework.boot:spring-boot-starter-test"
 
     api "org.testcontainers:testcontainers:$testContainersVersion"
 
     implementation "org.assertj:assertj-core:$assertjVersion"
-    implementation "io.rest-assured:rest-assured"
-    testImplementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "io.rest-assured:rest-assured:$restAssuredVersion"
+    testImplementation "org.springframework.boot:spring-boot-starter-webmvc"
 
 }
 

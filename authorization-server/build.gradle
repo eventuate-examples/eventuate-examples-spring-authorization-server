@@ -18,7 +18,7 @@ plugins {
 dependencies {
     implementation project(':authorization-server-password-grant')
     implementation project(':authorization-server-userdb')
-    implementation "org.springframework.boot:spring-boot-starter-oauth2-authorization-server"
+    implementation "org.springframework.boot:spring-boot-starter-security-oauth2-authorization-server"
     implementation "org.springframework.boot:spring-boot-starter-actuator"
 
     // Micrometer and OpenTelemetry dependencies
@@ -31,9 +31,9 @@ dependencies {
     implementation 'io.micrometer:micrometer-registry-otlp'
     implementation 'io.opentelemetry.instrumentation:opentelemetry-instrumentation-annotations:2.2.0'
 
-    testImplementation "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
     testImplementation "org.assertj:assertj-core:$assertjVersion"
-    testImplementation "io.rest-assured:rest-assured"
+    testImplementation "io.rest-assured:rest-assured:$restAssuredVersion"
 
 }
 

@@ -22,6 +22,8 @@ import java.util.Set;
  */
 public class OAuth2PasswordGrantAuthenticationConverter implements AuthenticationConverter {
     public static final AuthorizationGrantType PASSWORD_GRANT_TYPE = new AuthorizationGrantType("password");
+    static final String USERNAME_PARAMETER = "username";
+    static final String PASSWORD_PARAMETER = "password";
 
     @Nullable
     @Override
@@ -41,8 +43,8 @@ public class OAuth2PasswordGrantAuthenticationConverter implements Authenticatio
 
         Set<String> scopes = scope != null ? Set.of(scope.split(" ")) : null;
 
-        return new OAuth2PasswordGrantAuthenticationToken(parameters.getFirst(OAuth2ParameterNames.USERNAME),
-                parameters.getFirst(OAuth2ParameterNames.PASSWORD), clientPrincipal, scopes);
+        return new OAuth2PasswordGrantAuthenticationToken(parameters.getFirst(USERNAME_PARAMETER),
+                parameters.getFirst(PASSWORD_PARAMETER), clientPrincipal, scopes);
     }
 
     // from https://docs.spring.io/spring-authorization-server/docs/current/reference/html/guides/how-to-ext-grant-type.html
